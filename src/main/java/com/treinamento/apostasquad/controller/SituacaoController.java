@@ -20,6 +20,7 @@ import com.treinamento.apostasquad.repositories.SituacaoRepository;
 
 @RestController
 @RequestMapping("situacao")
+@CrossOrigin
 public class SituacaoController {
 	
 	@Autowired
