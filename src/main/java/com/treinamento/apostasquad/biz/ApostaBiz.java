@@ -30,8 +30,11 @@ public class ApostaBiz {
         
     	boolean valido = true;
         
-        if(aposta.getValor() < 10 || aposta.getValor() > 100){
-            this.mensagens.mensagem.add("Valor informado fora do limite, deve ser de R$ 10,00 até R$ 100,00");
+        if(aposta.getValor() < 10.00){
+            this.mensagens.mensagem.add("Valor informado fora do limite, deve ser superior à R$ 10,00");
+            valido=false;
+        }else if(aposta.getValor() > 100.00){
+            this.mensagens.mensagem.add("Valor informado fora do limite, deve inferior à R$ 100,00");
             valido=false;
         }
         
