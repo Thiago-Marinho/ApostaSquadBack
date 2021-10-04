@@ -25,19 +25,24 @@ import com.treinamento.apostasquad.repositories.SituacaoRepository;
 @RequestMapping("aposta")
 @CrossOrigin
 public class ApostaController {
+	
 	@Autowired
     ApostaRepository apostaRepository;
-    @Autowired
+    
+	@Autowired
     ClienteRepository clienteRepository;
-    @Autowired
+    
+	@Autowired
     SituacaoRepository situacaoRepository;
-    @CrossOrigin
+    
+	@CrossOrigin
     @GetMapping("listar")
     public List<Aposta> listarAposta() {
         List<Aposta> lista = apostaRepository.findAll();
         return lista;
     }
-    @CrossOrigin
+    
+	@CrossOrigin
     @PostMapping("incluir")
     public List<String> incluir(@Valid @RequestBody Aposta novoAposta){
         Mensagem mensagem = new Mensagem();
