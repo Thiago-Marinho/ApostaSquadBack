@@ -26,7 +26,7 @@ public class ApostaBiz {
             this.mensagens.mensagem.add("A descrição inserida não deve possuir mais que 255 caracteres");
             valido=false;
         }
-        if(aposta.getId()==null){
+        if(aposta.getIdCliente()==null){
             this.mensagens.mensagem.add("O Id do cliente inserido não deve ser nulo");
             valido=false;
         }else if(clienteRepository.findById(aposta.getIdCliente()).isEmpty()){

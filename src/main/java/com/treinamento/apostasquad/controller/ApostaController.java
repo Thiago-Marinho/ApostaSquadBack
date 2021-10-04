@@ -11,39 +11,45 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.treinamento.apostasquad.Mensagem;
+import com.treinamento.apostasquad.biz.ApostaBiz;
 import com.treinamento.apostasquad.entities.Aposta;
 import com.treinamento.apostasquad.repositories.ApostaRepository;
 import com.treinamento.apostasquad.repositories.ClienteRepository;
 import com.treinamento.apostasquad.repositories.SituacaoRepository;
 
+@RestController
+@RequestMapping("aposta")
+@CrossOrigin
 public class ApostaController {
 	@Autowired
-    ApostaRepository servicoRepositorio;
+    ApostaRepository apostaRepository;
     @Autowired
-    ClienteRepository carroRepositorio;
+    ClienteRepository clienteRepository;
     @Autowired
-    SituacaoRepository mecanicoRepository;
+    SituacaoRepository situacaoRepository;
     @CrossOrigin
     @GetMapping("listar")
     public List<Aposta> listarAposta() {
-        List<Aposta> lista = servicoRepositorio.findAll();
+        List<Aposta> lista = apostaRepository.findAll();
         return lista;
     }
     @CrossOrigin
     @PostMapping("incluir")
     public List<String> incluir(@Valid @RequestBody Aposta novoAposta){
         Mensagem mensagem = new Mensagem();
-        ApostaBiz validadorAposta = new ApostaBiz(carroRepositorio);
+        ApostaBiz validadorAposta = new ApostaBiz(clienteRepository, situacaoRepository );
         if(validadorAposta.validarAposta(novoAposta)){
             try{
-                servicoRepositorio.save(novoAposta);
-                servicoRepositorio.flush();
-                mensagem.mensagem.add("Sucesso ao incluir servico!");
+                apostaRepository.save(novoAposta);
+                apostaRepository.flush();
+                mensagem.mensagem.add("Sucesso ao incluir aposta!");
 
             }catch (Exception err){
-                mensagem.mensagem.add("Erro ao incluir servico:");
+                mensagem.mensagem.add("Erro ao incluir aposta:");
                 mensagem.mensagem.add(err.getMessage());
             }
         }else{
@@ -55,24 +61,24 @@ public class ApostaController {
     @CrossOrigin
     @GetMapping("/{id}")
     public Aposta consultar(@PathVariable int id) {
-        return this.servicoRepositorio.findById(id).get();
+        return this.apostaRepository.findById(id).get();
     }
 
     @CrossOrigin
     @PutMapping("alterar")
     public Mensagem alterar(@Valid @RequestBody Aposta novoAposta){
-        ApostaBiz servicoBiz = new ApostaBiz(carroRepositorio);
+        ApostaBiz apostaBiz = new ApostaBiz(clienteRepository, situacaoRepository);
         try {
-            if (servicoBiz.validarAposta(novoAposta)) {
-                servicoRepositorio.save(novoAposta);
-                servicoRepositorio.flush();
-                servicoBiz.getMensagens().mensagem.add("CorridaClientePiloto atualizado com sucesso!");
+            if (apostaBiz.validarAposta(novoAposta)) {
+                apostaRepository.save(novoAposta);
+                apostaRepository.flush();
+                apostaBiz.getMensagens().mensagem.add("CorridaClientePiloto atualizado com sucesso!");
             } else {
-                servicoBiz.getMensagens().mensagem.add("Erro ao alterar!");
+                apostaBiz.getMensagens().mensagem.add("Erro ao alterar!");
             }
         } catch (Exception e) {
-            servicoBiz.getMensagens().mensagem.add("Erro ao alterar: " + e.getMessage());
+            apostaBiz.getMensagens().mensagem.add("Erro ao alterar: " + e.getMessage());
         }
-        return servicoBiz.getMensagens();
+        return apostaBiz.getMensagens();
     }
 }
