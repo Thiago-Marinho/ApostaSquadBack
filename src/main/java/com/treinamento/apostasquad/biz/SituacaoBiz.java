@@ -18,15 +18,19 @@ public class SituacaoBiz {
 		this.mensagem = mensagem;
 	}
 	
-	public Boolean validar(Situacao equipe) {
+	public Boolean validar(Situacao situacao) {
 		Boolean validacao = true;
 		
-		if(equipe.getDescricao().isEmpty()) {
+		if(situacao.getDescricao().isEmpty()) {
 			mensagem.getMensagem().add("A descrição não pode estar vazia");
 			validacao = false;
 		}
-		if(equipe.getDescricao().length() > 20) {
+		if(situacao.getDescricao().length() > 20) {
 			mensagem.getMensagem().add("A descrição não deve ser maior que 20 caracteres");
+			validacao = false;
+		}
+		if(situacao.getDescricao().isBlank()) {
+			mensagem.getMensagem().add("A descricao nao pode ser composta por apenas espaço");
 			validacao = false;
 		}
 		return validacao;
