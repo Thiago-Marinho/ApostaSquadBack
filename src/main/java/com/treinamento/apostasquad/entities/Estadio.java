@@ -13,9 +13,9 @@ public class Estadio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	public Integer id;
+	private Integer id;
 	@Column(name = "descricao")
-	public String descricao;
+	private String descricao;
 	
 	public Estadio() {
 		super();
