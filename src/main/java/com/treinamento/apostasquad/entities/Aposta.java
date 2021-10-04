@@ -28,17 +28,6 @@ public class Aposta {
 	@Column(name="id_situacao")
 	private Integer idSituacao;
 
-	public Aposta() {}
-	
-	public Aposta(Integer id, Double valor, String descricao, Integer idCliente, Integer idSituacao) {
-		super();
-		this.id = id;
-		this.valor = valor;
-		this.descricao = descricao;
-		this.idCliente = idCliente;
-		this.idSituacao = idSituacao;
-	}
-
 	public Integer getId() {
 		return id;
 	}
