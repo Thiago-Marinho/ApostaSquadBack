@@ -2,11 +2,9 @@ package com.treinamento.apostasquad.biz;
 
 import com.treinamento.apostasquad.Mensagem;
 import com.treinamento.apostasquad.entities.Estadio;
-import com.treinamento.apostasquad.repositories.EstadioRepository;
 
 public class EstadioBiz {
 	private Mensagem mensagem;
-	private EstadioRepository estadioRepository;
 	
 	public EstadioBiz() {
 		this.mensagem = new Mensagem();
