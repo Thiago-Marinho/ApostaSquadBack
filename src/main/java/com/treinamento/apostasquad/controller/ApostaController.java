@@ -72,7 +72,7 @@ public class ApostaController {
             if (apostaBiz.validarAposta(novoAposta)) {
                 apostaRepository.save(novoAposta);
                 apostaRepository.flush();
-                apostaBiz.getMensagens().mensagem.add("CorridaClientePiloto atualizado com sucesso!");
+                apostaBiz.getMensagens().mensagem.add("Aposta atualizada com sucesso!");
             } else {
                 apostaBiz.getMensagens().mensagem.add("Erro ao alterar!");
             }
