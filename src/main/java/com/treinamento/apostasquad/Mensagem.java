@@ -19,4 +19,12 @@ public class Mensagem {
         this.mensagem = mensagem;
     }
 
+    public Boolean ContemErro() {
+    	for(String m : this.mensagem) {
+    		if (m.contains("Erro")) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 }
