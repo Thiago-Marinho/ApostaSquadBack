@@ -39,8 +39,7 @@ public class PartidaBiz {
 		if(partida.getId_estadio() == null) {
 			mensagem.getMensagem().add("O estadio da partida não deve ser vazio");
 			validacao = false;
-		}
-		if(estadioRepository.findById(partida.getId_estadio()).isEmpty()) {
+		}else if(estadioRepository.findById(partida.getId_estadio()).isEmpty()) {
 			mensagem.getMensagem().add("Estádio não existe");
 			validacao = false;
 		}
