@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 	@Entity
-	@Table(name="time_partida")
+	@Table(name="timepartida")
 	public class TimePartida {
 		
 		@Id
