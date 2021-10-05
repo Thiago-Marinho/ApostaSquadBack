@@ -2,7 +2,6 @@ package com.treinamento.apostasquad.biz;
 
 import com.treinamento.apostasquad.Mensagem;
 import com.treinamento.apostasquad.entities.Time;
-import com.treinamento.apostasquad.repositories.TimeRepository;
 
 public class TimeBiz {
 	

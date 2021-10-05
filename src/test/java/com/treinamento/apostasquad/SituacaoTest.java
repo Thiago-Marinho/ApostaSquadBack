@@ -49,7 +49,7 @@ public class SituacaoTest {
     }
 
     @Test
-    public void SituacaoControllerAlterarTest() {
+    public void situacaoControllerAlterarTest() {
 
         Boolean expected = true;
         Boolean result = false;
@@ -65,8 +65,7 @@ public class SituacaoTest {
             Situacao situacao  =
                     situacaoController.consultar(situacaoUpdate.getId());
 
-            if (  situacao.getId() == situacaoUpdate.getId() &&
-                    situacao.getDescricao() == situacaoUpdate.getDescricao()) {
+            if (  situacao.getId() == situacaoUpdate.getId()) {
                 result = true;
             }
         }
