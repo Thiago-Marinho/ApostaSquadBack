@@ -57,17 +57,19 @@ public class ClienteController {
 	}
 	
 	@PutMapping("alterar/{id}")
-    public String alterarCliente(@RequestBody @Validated Cliente cliente) {
-
-        try {
-            clienteRepository.save(cliente);
-            clienteRepository.flush();
-            return " Alterado com sucesso";
-        } catch (Exception e) {
-            return e.getMessage();
+    public Mensagem alterarCliente(@RequestBody @Validated Cliente cliente) {
+		ClienteBiz clienteBiz = new ClienteBiz(clienteRepository);
+		try {
+			if(clienteBiz.validar(cliente) && !clienteRepository.findById(cliente.getId()).isEmpty()) {
+				clienteRepository.save(cliente);
+				clienteRepository.flush();
+				clienteBiz.getMsg().mensagem.add("Ok!");
+			}else {
+				clienteBiz.getMsg().mensagem.add("Id mencionado não existe!");
+			}
+		} catch (Exception e) {
+			clienteBiz.getMsg().mensagem.add("Erro ao alterar: " + e.getMessage());
+		}
+		return clienteBiz.getMsg();
 	}
-
-	}
-	
-
 }
