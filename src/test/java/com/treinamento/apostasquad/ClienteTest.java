@@ -67,6 +67,7 @@ public class ClienteTest {
 		assertThat(result).isEqualTo(expected);
 	}
 	
+	@Test
 	public void ClienteBizTest() {
 		ClienteBiz clienteBiz = new ClienteBiz(clienteRepository);
 		Cliente cliente = new Cliente();

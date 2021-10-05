@@ -67,6 +67,7 @@ public class EstadioTest {
     	assertThat(result).isEqualTo(expected);
 	}
 	
+	@Test
 	public void EstadioBizTest() {
 		EstadioBiz estadioBiz = new EstadioBiz();
 		Estadio estadio = new Estadio();
