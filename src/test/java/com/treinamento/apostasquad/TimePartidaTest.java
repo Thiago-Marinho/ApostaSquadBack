@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 
 import com.treinamento.apostasquad.biz.TimePartidaBiz;
 import com.treinamento.apostasquad.controller.TimePartidaController;
+import com.treinamento.apostasquad.entities.Time;
 import com.treinamento.apostasquad.entities.TimePartida;
 import com.treinamento.apostasquad.repositories.PartidaRepository;
 import com.treinamento.apostasquad.repositories.TimePartidaRepository;
@@ -67,10 +68,36 @@ public class TimePartidaTest {
     @Test
 	public void TipoPartidaControllerConsultarTest() {
     	
-        TimePartida umTipoPartida = obterPrimeiroRegistro();
-        Integer expected = umTipoPartida.getId();
-        TimePartida getTipoPartida = this.controller.consultar(expected);
-        Integer result = getTipoPartida.getId();
+        TimePartida umTimePartida = obterPrimeiroRegistro();
+        Integer expected = umTimePartida.getId();
+        TimePartida getTimePartida = this.controller.consultar(expected);
+        Integer result = getTimePartida.getId();
+
+		assertThat(result).isEqualTo(expected);
+	}
+    
+    @Test
+	public void TimeControllerAlterarTest() {
+
+		Boolean expected = true;
+		Boolean result = false;
+
+		TimePartida timePartidaUpdate = obterPrimeiroRegistro();
+
+		timePartidaUpdate.setIdPartida(1);
+		timePartidaUpdate.setIdTime(1);
+
+		Mensagem msg = this.controller.alterar(timePartidaUpdate);
+
+		if (msg.ContemErro()) {
+			result = false;
+		} else {
+			TimePartida timePartida = controller.consultar(timePartidaUpdate.getId());
+
+			if (timePartida.getId() == timePartidaUpdate.getId()) {
+				result = true;
+			}
+		}
 
 		assertThat(result).isEqualTo(expected);
 	}

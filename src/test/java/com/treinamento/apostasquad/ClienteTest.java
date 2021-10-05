@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import com.treinamento.apostasquad.biz.ClienteBiz;
 import com.treinamento.apostasquad.controller.ClienteController;
 import com.treinamento.apostasquad.entities.Cliente;
 import com.treinamento.apostasquad.repositories.ClienteRepository;
@@ -59,14 +60,35 @@ public class ClienteTest {
 			result = false;
 		} else {
 			Cliente cliente = clienteController.consultar(clienteUpdate.getId());
-			if (cliente.getId() == clienteUpdate.getId() && cliente.getNome() == clienteUpdate.getNome()) {
+			if (cliente.getId() == clienteUpdate.getId() && cliente.getNome().equals(clienteUpdate.getNome())) {
 				result = true;
 			}
 		}
 		assertThat(result).isEqualTo(expected);
 	}
+	
+	@Test
+	public void ClienteBizTest() {
+		ClienteBiz clienteBiz = new ClienteBiz(clienteRepository);
+		Cliente cliente = new Cliente();
+		Boolean expected = true;
+		Boolean result = true;
+		
+		cliente.setNome(
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+				+ "Etiam maximus commodo nulla, at vestibulum neque aliquam sed. "
+				+ "Donec cursus, erat mollis dapibus egestas, metus nunc pretium nulla, "
+				+ "pretium sodales dui ligula sed nunc. " + "Vivamus porta nisi vitae augue cursus pulvinar. "
+				+ "Praesent vehicula vitae mauris non sollicitudin. " 
+				+ "Vivamus condimentum imperdiet arcu, quis."
+				);
+		if(clienteBiz.validar(cliente)) {
+			result = false;
+		}
+		assertThat(result).isEqualTo(expected);
+	}
 
 	public Cliente getPrimeiroCliente() {
-		return clienteRepository.findAll(PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, "id"))).toList().get(0);
+		return clienteRepository.findAll(PageRequest.of(0, 1, Sort.by(Sort.Direction.ASC, "id"))).toList().get(0);
 	}
 }
