@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.treinamento.apostasquad.Mensagem;
-import com.treinamento.apostasquad.biz.EstadioBiz;
 import com.treinamento.apostasquad.biz.TimeBiz;
 import com.treinamento.apostasquad.entities.Time;
 import com.treinamento.apostasquad.repositories.TimeRepository;
