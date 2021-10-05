@@ -48,6 +48,7 @@ public class TimePartidaBiz {
         
         if(!valido){
             this.mensagens.mensagem.add("A timePartida informada não é válida!");
+            valido=false;
         }
         
         return valido;
