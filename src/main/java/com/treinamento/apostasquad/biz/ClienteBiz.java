@@ -23,6 +23,7 @@ public class ClienteBiz {
 			valido = false;
 		} else if (cliente.getNome().length() > 255) {
 			msg.mensagem.add("Nao pode conter mais que 255 letras");
+			valido = false;
 		}
 		if(cliente.getNome().isBlank()) {
 			msg.mensagem.add("O nome nao pode ser composto somente por espaço");
