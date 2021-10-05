@@ -53,7 +53,7 @@ public class SituacaoController {
 		return equipeBiz.getMensagem();
 	}
 	
-	@PutMapping(path="alterar")
+	@PutMapping("alterar")
     public Mensagem alterarSituacao(@RequestBody @Validated Situacao equipe) {
         
     	SituacaoBiz equipeBiz = new SituacaoBiz();

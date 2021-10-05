@@ -56,7 +56,8 @@ public class TimeController {
 		return timeBiz.getMsg();
 	}
 	
-	@PutMapping("alterar/{id}")
+	@CrossOrigin
+	@PutMapping("alterar")
     public Mensagem alterarTime(@RequestBody @Validated Time time) {
 
 		TimeBiz timeBiz = new TimeBiz();

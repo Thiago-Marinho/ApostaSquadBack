@@ -2,6 +2,7 @@ package com.treinamento.apostasquad;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -71,12 +72,18 @@ public class PartidaTest {
 
         Partida partidaUpdate = obterPrimeiroRegistro();
 
-        partidaUpdate.setId(8);
-        Date dataNova = new Date("10/08/2021"); 
+        String date = "13/11/1997";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataNova = null;
+		try {
+			dataNova = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
         
         partidaUpdate.setId(1);
         partidaUpdate.setData(dataNova);
-        partidaUpdate.setDescricao("Partida 853");
+        partidaUpdate.setDescricao("Partida 171");
         partidaUpdate.setId_estadio(3);
         
         Mensagem msg = this.partidaController.alterarPartida(partidaUpdate);
