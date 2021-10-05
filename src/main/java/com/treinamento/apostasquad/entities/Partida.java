@@ -1,6 +1,6 @@
 package com.treinamento.apostasquad.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "partida")
 public class Partida {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -59,6 +60,4 @@ public class Partida {
 	public void setId_estadio(Integer id_estadio) {
 		this.id_estadio = id_estadio;
 	}
-	
-	
 }
