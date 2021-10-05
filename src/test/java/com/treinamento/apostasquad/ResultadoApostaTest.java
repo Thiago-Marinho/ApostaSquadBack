@@ -121,8 +121,5 @@ public class ResultadoApostaTest {
 	                PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, "id")));
 	        return pagina.toList().get(0);
 	    }
-	  
-	  
 	
-
 }
