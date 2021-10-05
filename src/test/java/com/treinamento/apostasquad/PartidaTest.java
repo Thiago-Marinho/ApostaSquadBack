@@ -2,6 +2,7 @@ package com.treinamento.apostasquad;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,9 @@ import com.treinamento.apostasquad.repositories.PartidaRepository;
 @SpringBootTest
 public class PartidaTest {
 	
-    @Autowired
+
+    
+	@Autowired
     PartidaRepository partidaRepository;
     
     @Autowired
@@ -69,8 +72,9 @@ public class PartidaTest {
         Partida partidaUpdate = obterPrimeiroRegistro();
 
         partidaUpdate.setId(8);
-        @SuppressWarnings("deprecation")
-		Date dataNova = new Date("15/12/2020");
+        Date dataNova = new Date("10/08/2021"); 
+        
+        partidaUpdate.setId(1);
         partidaUpdate.setData(dataNova);
         partidaUpdate.setDescricao("Partida 853");
         partidaUpdate.setId_estadio(3);
@@ -94,28 +98,29 @@ public class PartidaTest {
 
     }
 
-    @SuppressWarnings("deprecation")
 	@Test
     public void partidaBizValidarTest() {
-        PartidaBiz partidaBiz = new PartidaBiz(estadioRepository);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		PartidaBiz partidaBiz = new PartidaBiz(estadioRepository);
+		
         Boolean result = true;
         Boolean expected = true;
 
         Partida partida = new Partida();
        
         // esperamos receber falso!
-        Date dataTeste = new Date("05/05/2019"); 
-        partida.setData(dataTeste);
+        
+        partida.setData(null);
         partida.setDescricao("Testando");
         partida.setId_estadio(1);
         
         if(partidaBiz.validarPartida(partida)) result = false;
 
         // esperamos receber falso!
-        dataTeste = new Date("Testando"); 
-        partida.setData(dataTeste);
-        partida.setDescricao("Testando");
-        partida.setId_estadio(1);
+        partida.setData(null);
+        partida.setDescricao("");
+        partida.setId_estadio(99999999);
         if(partidaBiz.validarPartida(partida)) result = false;
 
         assertThat(result).isEqualTo(expected);

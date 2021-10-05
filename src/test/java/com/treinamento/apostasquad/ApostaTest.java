@@ -69,7 +69,6 @@ public class ApostaTest {
 
         apostaUpdate.setValor(25.00);
         apostaUpdate.setDescricao("Palmeiras x Corinthians");
-        apostaUpdate.setDescricao("troca de pneu top");
         apostaUpdate.setIdCliente(3);
         apostaUpdate.setIdSituacao(2);
         Mensagem msg = this.apostaController.alterar(apostaUpdate);
