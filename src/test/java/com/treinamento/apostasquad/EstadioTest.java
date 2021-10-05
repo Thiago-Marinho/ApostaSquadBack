@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import com.treinamento.apostasquad.biz.EstadioBiz;
 import com.treinamento.apostasquad.controller.EstadioController;
 import com.treinamento.apostasquad.entities.Estadio;
 import com.treinamento.apostasquad.repositories.EstadioRepository;
@@ -20,7 +21,7 @@ public class EstadioTest {
 	EstadioController estadioController;
 	
 	@Test
-	public void ClienteListarTest() {
+	public void EstadioListarTest() {
 		Integer expected = 0;
 		Integer result;
 		expected = estadioRepository.findAll().size();
@@ -28,14 +29,14 @@ public class EstadioTest {
 		assertThat(result).isEqualTo(expected);
 	}
 	@Test
-	public void ClienteConsultarTest() {
+	public void EstadioConsultarTest() {
 		Integer expected = getPrimeiroEstadio().getId();
 		Integer result = estadioController.listarEstadio(expected).getId();
 		assertThat(result).isEqualTo(expected);
 	}
 	
 	@Test
-	public void ClienteIncluirTest() {
+	public void EstadioIncluirTest() {
 		Integer expected = estadioRepository.findAll().size() + 1;
 		Estadio estadio = new Estadio();
 		estadio.setDescricao("Morenão");
@@ -45,7 +46,7 @@ public class EstadioTest {
 	}
 	
 	@Test
-	public void ClienteAlterarTest() {
+	public void EstadioAlterarTest() {
 		Boolean expected = true;
     	Boolean result = false;
     	
@@ -59,15 +60,35 @@ public class EstadioTest {
     	}else {
     		Estadio estadio = estadioController.listarEstadio(estadioUpdate.getId());
     		if(estadio.getId() == estadioUpdate.getId()
-    				&& estadio.getDescricao() == estadioUpdate.getDescricao()) {
+    				&& estadio.getDescricao().equals(estadioUpdate.getDescricao())) {
     			result = true;
     		}
     	}
     	assertThat(result).isEqualTo(expected);
 	}
 	
+	public void EstadioBizTest() {
+		EstadioBiz estadioBiz = new EstadioBiz();
+		Estadio estadio = new Estadio();
+		Boolean expected = true;
+		Boolean result = true;
+		
+		estadio.setDescricao(
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+				+ "Etiam maximus commodo nulla, at vestibulum neque aliquam sed. "
+				+ "Donec cursus, erat mollis dapibus egestas, metus nunc pretium nulla, "
+				+ "pretium sodales dui ligula sed nunc. " + "Vivamus porta nisi vitae augue cursus pulvinar. "
+				+ "Praesent vehicula vitae mauris non sollicitudin. " 
+				+ "Vivamus condimentum imperdiet arcu, quis."
+				);
+		if(estadioBiz.validar(estadio)) {
+			result = false;
+		}
+		assertThat(result).isEqualTo(expected);
+	}
+	
 	public Estadio getPrimeiroEstadio(){
         return estadioRepository.findAll(
-                PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, "id"))).toList().get(0);
+                PageRequest.of(0, 1, Sort.by(Sort.Direction.ASC, "id"))).toList().get(0);
     }
 }
