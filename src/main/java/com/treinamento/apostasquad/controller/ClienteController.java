@@ -56,7 +56,7 @@ public class ClienteController {
 		return clienteBiz.getMsg();
 	}
 	
-	@PutMapping("alterar/{id}")
+	@PutMapping("alterar")
     public Mensagem alterarCliente(@RequestBody @Validated Cliente cliente) {
 		ClienteBiz clienteBiz = new ClienteBiz(clienteRepository);
 		try {
