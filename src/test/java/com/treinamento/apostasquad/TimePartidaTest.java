@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 
 import com.treinamento.apostasquad.biz.TimePartidaBiz;
 import com.treinamento.apostasquad.controller.TimePartidaController;
-import com.treinamento.apostasquad.entities.Time;
 import com.treinamento.apostasquad.entities.TimePartida;
 import com.treinamento.apostasquad.repositories.PartidaRepository;
 import com.treinamento.apostasquad.repositories.TimePartidaRepository;
