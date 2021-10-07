@@ -28,12 +28,12 @@ public class PartidaController {
 	@Autowired
 	private EstadioRepository estadioRepository;
 	
-	@GetMapping("listar")
+	@GetMapping({"listar"})
 	public List<Partida> listarPartidas(){
 		return partidaRepository.findAll();
 	}
 	
-	@GetMapping(path = {"listar/{id}"})
+	@GetMapping({"listar/{id}"})
 	public Partida listarPartida(@PathVariable int id){
 		return partidaRepository.findById(id).get();
 	}
@@ -53,7 +53,7 @@ public class PartidaController {
 		return partidaBiz.getMensagem();
 	}
 	
-	@PutMapping("alterar")
+	@PutMapping({"alterar"})
 	public Mensagem alterarPartida(@Validated @RequestBody Partida partida) {
 		PartidaBiz partidaBiz = new PartidaBiz(estadioRepository);
 		try {
